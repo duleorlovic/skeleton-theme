@@ -11,6 +11,7 @@
   {% content_for 'block', type: 'group', id: 'group' %}
 {% enddoc %}
 
+blocks/group
 <div
   class="group {{ block.settings.layout_direction }}"
   style="
@@ -21,6 +22,7 @@
 >
   {% content_for 'blocks' %}
 </div>
+blocks/endgroup
 
 {% stylesheet %}
   .group {

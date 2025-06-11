@@ -14,8 +14,10 @@
   </head>
 
   <body>
+    layout/theme.liquid { { sections "header-group" }}
     {% sections 'header-group' %}
 
+    layout/theme.liquid { { content_for_layout }}
     {{ content_for_layout }}
 
     {% sections 'footer-group' %}
