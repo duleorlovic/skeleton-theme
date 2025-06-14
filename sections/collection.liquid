@@ -5,13 +5,29 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/collection
 {% endcomment %}
 
+<div>
+{ { start sections/collection.liquid }}
+</div>
+
+<div>
+{ { collection.title }}
 <h1>{{ collection.title }}</h1>
+  { % paginate collection.products by 20 %}
+    { % for product in collection.products %}
+</div>
 
 <div class="collection-products">
   {% paginate collection.products by 20 %}
     {% for product in collection.products %}
       <div class="collection-product">
         {% if product.featured_image %}
+          { % render 'image',
+            class: 'collection-product__image',
+            image: product.featured_image,
+            url: product.url,
+            width: 400,
+            height: 400,
+            crop: 'center'
           {% render 'image',
             class: 'collection-product__image',
             image: product.featured_image,
@@ -22,7 +38,9 @@
           %}
         {% endif %}
         <div class="collection-product__content">
+          { { product.title | escape | link_to: product.url }}
           <p>{{ product.title | escape | link_to: product.url }}</p>
+          { { product.price | money }}
           <p>{{ product.price | money }}</p>
         </div>
       </div>
@@ -30,6 +48,10 @@
 
     {{ paginate | default_pagination }}
   {% endpaginate %}
+</div>
+<div>
+    { { paginate | default_pagination }}
+  { % endpaginate %}
 </div>
 
 {% stylesheet %}

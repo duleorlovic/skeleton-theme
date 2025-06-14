@@ -5,15 +5,28 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/404
 {% endcomment %}
 
+<div>
+{ { start sections/404.liquid }}
+{ { '404.title' | t }}
 <h1>{{ '404.title' | t }}</h1>
+</div>
 
 <p>
+  { { '404.not_found' | t }}
   {{ '404.not_found' | t }}
 </p>
 
+<div>
+< a href="{ { routes.all_products_collection_url }}">
 <a href="{{ routes.all_products_collection_url }}">
+  { { '404.back_to_shopping' | t }}
   {{ '404.back_to_shopping' | t }}
 </a>
+</div>
+
+<div>
+{ { end sections/404.liquid }}
+</div>
 
 {% schema %}
 {
