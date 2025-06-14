@@ -11,6 +11,9 @@
   "sections": {
     "hi_RyzzqM": {
       "type": "hi",
+      "custom_css": [
+        "h1 {color: red;}"
+      ],
       "name": "name-in-preset",
       "settings": {
         "enabled": true,
