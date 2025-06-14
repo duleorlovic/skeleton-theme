@@ -15,6 +15,19 @@
     },
     "hi_RyzzqM": {
       "type": "hi",
+      "blocks": {
+        "myblock_EMY9tQ": {
+          "type": "myblock",
+          "name": "my-block",
+          "settings": {
+            "text": "def dsadsa"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "myblock_EMY9tQ"
+      ],
       "custom_css": [
         "h1 {color: red;}"
       ],
