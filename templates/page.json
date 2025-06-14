@@ -25,10 +25,82 @@
             "alignment": "left"
           },
           "blocks": {}
+        },
+        "group_nG7LN4": {
+          "type": "group",
+          "name": "t:general.row",
+          "settings": {
+            "layout_direction": "group--horizontal",
+            "alignment": "flex-start",
+            "padding": 0
+          },
+          "blocks": {
+            "text_MXUW4w": {
+              "type": "text",
+              "name": "t:general.text",
+              "settings": {
+                "text": "row1",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "text_FeWpkx": {
+              "type": "text",
+              "name": "t:general.text",
+              "settings": {
+                "text": "Text",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_MXUW4w",
+            "text_FeWpkx"
+          ]
+        },
+        "group_URTDYp": {
+          "type": "group",
+          "name": "t:general.column",
+          "settings": {
+            "layout_direction": "group--horizontal",
+            "alignment": "flex-start",
+            "padding": 22
+          },
+          "blocks": {
+            "text_qatAD4": {
+              "type": "text",
+              "name": "Naslov",
+              "settings": {
+                "text": "levo",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
+            "text_HwPWhw": {
+              "type": "text",
+              "name": "t:general.text",
+              "settings": {
+                "text": "desno",
+                "text_style": "text--title",
+                "alignment": "left"
+              },
+              "blocks": {}
+            }
+          },
+          "block_order": [
+            "text_qatAD4",
+            "text_HwPWhw"
+          ]
         }
       },
       "block_order": [
-        "text_bFpcUV"
+        "text_bFpcUV",
+        "group_nG7LN4",
+        "group_URTDYp"
       ],
       "name": "t:general.custom_section",
       "settings": {}
