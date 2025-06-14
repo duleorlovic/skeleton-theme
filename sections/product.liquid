@@ -5,23 +5,34 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/product
 {% endcomment %}
 
+<div>
+  { { start sections/product.liquid }}
+</div>
 <div class="product-images">
+  { % for image in product.images %}
   {% for image in product.images %}
+    { % render 'image', class: 'product-image', image: image %}
     {% render 'image', class: 'product-image', image: image %}
   {% endfor %}
 </div>
 
 <div class="product-info">
+  { { product.title }}
   <h1>{{ product.title }}</h1>
+  { { product.price | money }}
   <p>{{ product.price | money }}</p>
+  { { product.description }}
   <p>{{ product.description }}</p>
 </div>
 
 <div class="product-form">
+  { % form 'product', product %}
   {% form 'product', product %}
+    { % assign current_variant = product.selected_or_first_available_variant %}
     {% assign current_variant = product.selected_or_first_available_variant %}
 
     <select name="id">
+      { % for variant in product.variants %}
       {% for variant in product.variants %}
         <option
           value="{{ variant.id }}"
@@ -29,14 +40,18 @@
             selected="selected"
           {% endif %}
         >
+          { { variant.title }} - { { variant.price | money }}
           {{ variant.title }} - {{ variant.price | money }}
         </option>
       {% endfor %}
     </select>
 
+    < input type="text" name="quantity" min="1" value="1">
     <input type="text" name="quantity" min="1" value="1">
 
+    < input type="submit" value="Add to cart">
     <input type="submit" value="Add to cart">
+    { { form | payment_button }}
     {{ form | payment_button }}
   {% endform %}
 </div>
