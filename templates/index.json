@@ -16,7 +16,10 @@
     "hi_RyzzqM": {
       "type": "hi",
       "name": "name-in-preset",
-      "settings": {}
+      "settings": {
+        "enabled": true,
+        "main-image": "shopify://shop_images/29201_1200_1200px.jpg"
+      }
     }
   },
   "order": [
