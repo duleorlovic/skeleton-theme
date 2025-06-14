@@ -1,6 +1,580 @@
+{% doc %}
+  @prompt
+    A magazine-style editorial layout
+
+{% enddoc %}
+{% assign ai_gen_id = block.id | replace: '_', '' | downcase %}
+
+{% style %}
+  .ai-editorial-layout-{{ ai_gen_id }} {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: {{ block.settings.section_padding }}px;
+    background-color: {{ block.settings.background_color }};
+    font-family: {{ block.settings.body_font.family }}, {{ block.settings.body_font.fallback_families }};
+    font-weight: {{ block.settings.body_font.weight }};
+    line-height: 1.6;
+  }
+
+  .ai-editorial-header-{{ ai_gen_id }} {
+    text-align: center;
+    margin-bottom: 60px;
+    border-bottom: 1px solid {{ block.settings.accent_color }};
+    padding-bottom: 40px;
+  }
+
+  .ai-editorial-category-{{ ai_gen_id }} {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: {{ block.settings.accent_color }};
+    margin-bottom: 16px;
+    font-weight: 600;
+  }
+
+  .ai-editorial-title-{{ ai_gen_id }} {
+    font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+    font-weight: {{ block.settings.heading_font.weight }};
+    font-size: {{ block.settings.title_size }}px;
+    color: {{ block.settings.text_color }};
+    margin: 0 0 20px;
+    line-height: 1.2;
+  }
+
+  .ai-editorial-subtitle-{{ ai_gen_id }} {
+    font-size: {{ block.settings.subtitle_size }}px;
+    color: {{ block.settings.subtitle_color }};
+    margin: 0 0 30px;
+    font-style: italic;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ai-editorial-byline-{{ ai_gen_id }} {
+    font-size: 14px;
+    color: {{ block.settings.byline_color }};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .ai-editorial-author-{{ ai_gen_id }} {
+    font-weight: 600;
+  }
+
+  .ai-editorial-date-{{ ai_gen_id }} {
+    position: relative;
+  }
+
+  .ai-editorial-date-{{ ai_gen_id }}::before {
+    content: '•';
+    margin-right: 10px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .ai-editorial-content-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .ai-editorial-hero-image-{{ ai_gen_id }} {
+    width: 100%;
+    margin-bottom: 40px;
+  }
+
+  .ai-editorial-hero-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-editorial-hero-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 400px;
+    background-color: #f5f5f5;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .ai-editorial-hero-placeholder-{{ ai_gen_id }} svg {
+    width: 80px;
+    height: 80px;
+    opacity: 0.3;
+  }
+
+  .ai-editorial-body-{{ ai_gen_id }} {
+    display: grid;
+    grid-template-columns: repeat({{ block.settings.columns_desktop }}, 1fr);
+    gap: 40px;
+    font-size: {{ block.settings.body_text_size }}px;
+    color: {{ block.settings.text_color }};
+  }
+
+  .ai-editorial-column-{{ ai_gen_id }} {
+    text-align: justify;
+  }
+
+  .ai-editorial-column-{{ ai_gen_id }} p {
+    margin-bottom: 20px;
+  }
+
+  .ai-editorial-column-{{ ai_gen_id }} p:first-child::first-letter {
+    {% if block.settings.show_drop_cap %}
+      float: left;
+      font-size: 4em;
+      line-height: 0.8;
+      padding-right: 8px;
+      padding-top: 4px;
+      font-family: {{ block.settings.heading_font.family }}, {{ block.settings.heading_font.fallback_families }};
+      color: {{ block.settings.accent_color }};
+    {% endif %}
+  }
+
+  .ai-editorial-pullquote-{{ ai_gen_id }} {
+    grid-column: 1 / -1;
+    text-align: center;
+    font-size: {{ block.settings.pullquote_size }}px;
+    font-style: italic;
+    color: {{ block.settings.accent_color }};
+    margin: 40px 0;
+    padding: 30px;
+    border-top: 2px solid {{ block.settings.accent_color }};
+    border-bottom: 2px solid {{ block.settings.accent_color }};
+    position: relative;
+  }
+
+  .ai-editorial-pullquote-{{ ai_gen_id }}::before {
+    content: '"';
+    font-size: 60px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: {{ block.settings.background_color }};
+    padding: 0 10px;
+    color: {{ block.settings.accent_color }};
+  }
+
+  .ai-editorial-inline-image-{{ ai_gen_id }} {
+    margin: 30px 0;
+    text-align: center;
+  }
+
+  .ai-editorial-inline-image-{{ ai_gen_id }} img {
+    width: 100%;
+    height: auto;
+    border-radius: {{ block.settings.image_border_radius }}px;
+  }
+
+  .ai-editorial-inline-placeholder-{{ ai_gen_id }} {
+    width: 100%;
+    height: 250px;
+    background-color: #f5f5f5;
+    border-radius: {{ block.settings.image_border_radius }}px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 30px 0;
+  }
+
+  .ai-editorial-inline-placeholder-{{ ai_gen_id }} svg {
+    width: 60px;
+    height: 60px;
+    opacity: 0.3;
+  }
+
+  .ai-editorial-caption-{{ ai_gen_id }} {
+    font-size: 12px;
+    color: {{ block.settings.byline_color }};
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .ai-editorial-layout-{{ ai_gen_id }} {
+      padding: {{ block.settings.section_padding | times: 0.6 }}px;
+    }
+
+    .ai-editorial-title-{{ ai_gen_id }} {
+      font-size: {{ block.settings.title_size | times: 0.8 }}px;
+    }
+
+    .ai-editorial-subtitle-{{ ai_gen_id }} {
+      font-size: {{ block.settings.subtitle_size | times: 0.9 }}px;
+    }
+
+    .ai-editorial-body-{{ ai_gen_id }} {
+      grid-template-columns: repeat({{ block.settings.columns_mobile }}, 1fr);
+      gap: 20px;
+    }
+
+    .ai-editorial-byline-{{ ai_gen_id }} {
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .ai-editorial-date-{{ ai_gen_id }}::before {
+      display: none;
+    }
+
+    .ai-editorial-hero-placeholder-{{ ai_gen_id }} {
+      height: 250px;
+    }
+
+    .ai-editorial-pullquote-{{ ai_gen_id }} {
+      font-size: {{ block.settings.pullquote_size | times: 0.8 }}px;
+      padding: 20px;
+      margin: 30px 0;
+    }
+  }
+{% endstyle %}
+
+<article class="ai-editorial-layout-{{ ai_gen_id }}" {{ block.shopify_attributes }}>
+  <header class="ai-editorial-header-{{ ai_gen_id }}">
+    {% if block.settings.category != blank %}
+      <div class="ai-editorial-category-{{ ai_gen_id }}">{{ block.settings.category }}</div>
+    {% endif %}
+    
+    {% if block.settings.title != blank %}
+      <h1 class="ai-editorial-title-{{ ai_gen_id }}">{{ block.settings.title }}</h1>
+    {% endif %}
+    
+    {% if block.settings.subtitle != blank %}
+      <div class="ai-editorial-subtitle-{{ ai_gen_id }}">{{ block.settings.subtitle }}</div>
+    {% endif %}
+    
+    <div class="ai-editorial-byline-{{ ai_gen_id }}">
+      {% if block.settings.author != blank %}
+        <span class="ai-editorial-author-{{ ai_gen_id }}">By {{ block.settings.author }}</span>
+      {% endif %}
+      {% if block.settings.publish_date != blank %}
+        <time class="ai-editorial-date-{{ ai_gen_id }}">{{ block.settings.publish_date }}</time>
+      {% endif %}
+    </div>
+  </header>
+
+  <div class="ai-editorial-content-{{ ai_gen_id }}">
+    {% if block.settings.hero_image %}
+      <div class="ai-editorial-hero-image-{{ ai_gen_id }}">
+        <img
+          src="{{ block.settings.hero_image | image_url: width: 1200 }}"
+          alt="{{ block.settings.hero_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.hero_image.width }}"
+          height="{{ block.settings.hero_image.height }}"
+        >
+        {% if block.settings.hero_caption != blank %}
+          <div class="ai-editorial-caption-{{ ai_gen_id }}">{{ block.settings.hero_caption }}</div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="ai-editorial-hero-placeholder-{{ ai_gen_id }}">
+        {{ 'hero-apparel-1' | placeholder_svg_tag }}
+      </div>
+    {% endif %}
+
+    <div class="ai-editorial-body-{{ ai_gen_id }}">
+      {% if block.settings.body_text_1 != blank %}
+        <div class="ai-editorial-column-{{ ai_gen_id }}">{{ block.settings.body_text_1 }}</div>
+      {% endif %}
+      
+      {% if block.settings.body_text_2 != blank %}
+        <div class="ai-editorial-column-{{ ai_gen_id }}">{{ block.settings.body_text_2 }}</div>
+      {% endif %}
+      
+      {% if block.settings.body_text_3 != blank %}
+        <div class="ai-editorial-column-{{ ai_gen_id }}">{{ block.settings.body_text_3 }}</div>
+      {% endif %}
+    </div>
+
+    {% if block.settings.pullquote != blank %}
+      <blockquote class="ai-editorial-pullquote-{{ ai_gen_id }}">
+        {{ block.settings.pullquote }}
+      </blockquote>
+    {% endif %}
+
+    {% if block.settings.inline_image %}
+      <div class="ai-editorial-inline-image-{{ ai_gen_id }}">
+        <img
+          src="{{ block.settings.inline_image | image_url: width: 800 }}"
+          alt="{{ block.settings.inline_image.alt | escape }}"
+          loading="lazy"
+          width="{{ block.settings.inline_image.width }}"
+          height="{{ block.settings.inline_image.height }}"
+        >
+        {% if block.settings.inline_caption != blank %}
+          <div class="ai-editorial-caption-{{ ai_gen_id }}">{{ block.settings.inline_caption }}</div>
+        {% endif %}
+      </div>
+    {% else %}
+      {% if block.settings.show_inline_placeholder %}
+        <div class="ai-editorial-inline-placeholder-{{ ai_gen_id }}">
+          {{ 'detailed-apparel-1' | placeholder_svg_tag }}
+        </div>
+      {% endif %}
+    {% endif %}
+
+    {% if block.settings.body_text_4 != blank %}
+      <div class="ai-editorial-body-{{ ai_gen_id }}">
+        <div class="ai-editorial-column-{{ ai_gen_id }}">{{ block.settings.body_text_4 }}</div>
+      </div>
+    {% endif %}
+  </div>
+</article>
+
 {% schema %}
- {
-   "name": "AI_Block",
-   "tag": "shopify-ai-generated-block"
- }
+{
+  "name": "Editorial Layout",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Article Header"
+    },
+    {
+      "type": "text",
+      "id": "category",
+      "label": "Category",
+      "default": "Fashion"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Article title",
+      "default": "The Art of Modern Style"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Exploring contemporary fashion trends and their cultural impact on today's society"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author name",
+      "default": "Jane Smith"
+    },
+    {
+      "type": "text",
+      "id": "publish_date",
+      "label": "Publish date",
+      "default": "March 15, 2024"
+    },
+    {
+      "type": "header",
+      "content": "Hero Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Hero image"
+    },
+    {
+      "type": "text",
+      "id": "hero_caption",
+      "label": "Hero image caption"
+    },
+    {
+      "type": "header",
+      "content": "Article Content"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text_1",
+      "label": "Body text - Column 1",
+      "default": "<p>Fashion has always been a reflection of society's values, aspirations, and cultural movements. In today's rapidly evolving world, we witness an unprecedented fusion of traditional craftsmanship with cutting-edge technology, creating a new paradigm in how we perceive and consume fashion.</p><p>The modern consumer is more conscious than ever before, seeking authenticity and sustainability in their choices. This shift has prompted designers and brands to reconsider their approaches, leading to innovative solutions that honor both heritage and progress.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text_2",
+      "label": "Body text - Column 2",
+      "default": "<p>Digital transformation has revolutionized not only how fashion is created but also how it's presented and consumed. Virtual showrooms, augmented reality fitting experiences, and AI-driven personalization have become integral parts of the fashion ecosystem.</p><p>Yet, amidst this technological revolution, there's a growing appreciation for handcrafted details and artisanal techniques. This paradox defines contemporary fashion – the coexistence of high-tech innovation and traditional craftsmanship.</p>"
+    },
+    {
+      "type": "richtext",
+      "id": "body_text_3",
+      "label": "Body text - Column 3",
+      "default": "<p>Sustainability has emerged as a defining factor in modern fashion discourse. Consumers are increasingly aware of the environmental impact of their choices, driving demand for eco-friendly materials, ethical production practices, and circular fashion models.</p><p>This consciousness extends beyond environmental concerns to encompass social responsibility, fair labor practices, and cultural sensitivity – creating a more holistic approach to fashion that considers its broader impact on society.</p>"
+    },
+    {
+      "type": "text",
+      "id": "pullquote",
+      "label": "Pull quote",
+      "default": "Fashion is not just about clothing; it's about expressing identity, values, and aspirations in a world that's constantly evolving."
+    },
+    {
+      "type": "image_picker",
+      "id": "inline_image",
+      "label": "Inline image"
+    },
+    {
+      "type": "text",
+      "id": "inline_caption",
+      "label": "Inline image caption"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_inline_placeholder",
+      "label": "Show inline image placeholder",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "body_text_4",
+      "label": "Body text - Conclusion",
+      "default": "<p>As we look toward the future, fashion continues to evolve as a powerful medium of self-expression and cultural commentary. The industry's ability to adapt, innovate, and respond to changing societal needs ensures its relevance and vitality in shaping how we present ourselves to the world.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "columns_desktop",
+      "label": "Columns on desktop",
+      "options": [
+        {"value": "1", "label": "1"},
+        {"value": "2", "label": "2"},
+        {"value": "3", "label": "3"}
+      ],
+      "default": "2"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "label": "Columns on mobile",
+      "options": [
+        {"value": "1", "label": "1"}
+      ],
+      "default": "1"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_drop_cap",
+      "label": "Show drop cap on first paragraph",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "section_padding",
+      "min": 20,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Section padding",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "image_border_radius",
+      "min": 0,
+      "max": 20,
+      "step": 2,
+      "unit": "px",
+      "label": "Image border radius",
+      "default": 8
+    },
+    {
+      "type": "header",
+      "content": "Typography"
+    },
+    {
+      "type": "font_picker",
+      "id": "heading_font",
+      "label": "Heading font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "font_picker",
+      "id": "body_font",
+      "label": "Body font",
+      "default": "helvetica_n4"
+    },
+    {
+      "type": "range",
+      "id": "title_size",
+      "min": 24,
+      "max": 72,
+      "step": 2,
+      "unit": "px",
+      "label": "Title size",
+      "default": 48
+    },
+    {
+      "type": "range",
+      "id": "subtitle_size",
+      "min": 14,
+      "max": 28,
+      "step": 1,
+      "unit": "px",
+      "label": "Subtitle size",
+      "default": 18
+    },
+    {
+      "type": "range",
+      "id": "body_text_size",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "unit": "px",
+      "label": "Body text size",
+      "default": 16
+    },
+    {
+      "type": "range",
+      "id": "pullquote_size",
+      "min": 18,
+      "max": 36,
+      "step": 2,
+      "unit": "px",
+      "label": "Pull quote size",
+      "default": 24
+    },
+    {
+      "type": "header",
+      "content": "Colors"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text color",
+      "default": "#2c2c2c"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Subtitle color",
+      "default": "#666666"
+    },
+    {
+      "type": "color",
+      "id": "byline_color",
+      "label": "Byline color",
+      "default": "#888888"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent color",
+      "default": "#d4af37"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Editorial Layout"
+    }
+  ]
+}
 {% endschema %}
