@@ -12,9 +12,15 @@
     "main": {
       "type": "hello-world",
       "settings": {}
+    },
+    "hi_RyzzqM": {
+      "type": "hi",
+      "name": "name-in-preset",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "hi_RyzzqM"
   ]
 }
