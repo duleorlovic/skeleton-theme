@@ -9,21 +9,18 @@
  */
 {
   "sections": {
+    "main": {
+      "type": "hello-world",
+      "settings": {}
+    },
     "hi_RyzzqM": {
       "type": "hi",
       "name": "name-in-preset",
-      "settings": {
-        "enabled": true,
-        "main-image": "shopify://shop_images/29201_1200_1200px.jpg"
-      }
-    },
-    "main": {
-      "type": "hello-world",
       "settings": {}
     }
   },
   "order": [
-    "hi_RyzzqM",
-    "main"
+    "main",
+    "hi_RyzzqM"
   ]
 }
