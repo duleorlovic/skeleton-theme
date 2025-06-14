@@ -28,11 +28,19 @@
       "type": "custom-section",
       "name": "t:general.custom_section",
       "settings": {}
+    },
+    "hi_i7YChq": {
+      "type": "hi",
+      "name": "name-in-preset",
+      "settings": {
+        "enabled": false
+      }
     }
   },
   "order": [
     "main",
     "hi_RyzzqM",
-    "custom_section_Lny63w"
+    "custom_section_Lny63w",
+    "hi_i7YChq"
   ]
 }
