@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "main": {
+      "type": "hello-world",
+      "settings": {}
+    },
     "hi_RyzzqM": {
       "type": "hi",
       "custom_css": [
@@ -20,13 +24,15 @@
         "main-image": "shopify://shop_images/29835_1200_1200px.jpg"
       }
     },
-    "main": {
-      "type": "hello-world",
+    "custom_section_Lny63w": {
+      "type": "custom-section",
+      "name": "t:general.custom_section",
       "settings": {}
     }
   },
   "order": [
+    "main",
     "hi_RyzzqM",
-    "main"
+    "custom_section_Lny63w"
   ]
 }
