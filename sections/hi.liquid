@@ -7,6 +7,9 @@
 {% if section.settings.main-image %}
   {{ section.settings.main-image | image_url: width: 1000 | image_tag }}
 {% endif %}
+
+    {% content_for 'blocks' %}
+    -----
 {% if section.blocks.size == 0 %}
   no blocks
 {% else %}
@@ -19,6 +22,7 @@
 {% schema %}
 {
   "name": "Name in schema",
+  "blocks": [{ "type": "@theme" }],
   "settings": [
     {
       "type": "checkbox",
@@ -31,8 +35,6 @@
       "id": "main-image",
       "label": "Main image"
     }
-  ],
-  "blocks": [
   ],
   "presets": [
     {
