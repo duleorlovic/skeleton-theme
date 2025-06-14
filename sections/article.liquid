@@ -6,59 +6,94 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/article
 {% endcomment %}
 
+<div>
+  { { start sections/article.liquid }}
+</div>
 {% if article.image %}
+  { { article.image | image_url: width: 1000 | image_tag }}
   {{ article.image | image_url: width: 1000 | image_tag }}
 {% endif %}
 
+<div>
+{ { article.title }}
 <h1>{{ article.title }}</h1>
+</div>
 
 {% assign date = article.published_at | time_tag: format: 'date' %}
+<div>
+{ { 'blog.article_metadata_html' | t: date: date, author: article.author }}
 <p>{{ 'blog.article_metadata_html' | t: date: date, author: article.author }}</p>
+</div>
 
+<div>
+{ { article.content }}
 {{ article.content }}
+</div>
 
 {% if blog.comments_enabled? %}
+  <div>
+  { { 'blog.article_comments' | t }}
   <h2>{{ 'blog.article_comments' | t }}</h2>
+  </div>
 
   <div id="comments">
+    { % paginate article.comments by 10 %}
     {% paginate article.comments by 10 %}
+      { % for comment in article.comments %}
       {% for comment in article.comments %}
         <div>
+          { { comment.author }}
           <p>{{ comment.author }}</p>
           <p>
+            { {- comment.created_at | time_tag: format: 'date' -}}
             {{- comment.created_at | time_tag: format: 'date' -}}
           </p>
+          { { comment.content }}
           <p>{{ comment.content }}</p>
         </div>
       {% endfor %}
 
+      { { paginate | default_pagination: anchor: 'comments' }}
       {{ paginate | default_pagination: anchor: 'comments' }}
     {% endpaginate %}
   </div>
 
+  <div>
+  { % form 'new_comment', article %}
   {% form 'new_comment', article %}
+    { { 'blog.comment_form_title' | t }}
     <h2>{{ 'blog.comment_form_title' | t }}</h2>
 
+    { { form.errors | default_errors }}
     {{ form.errors | default_errors }}
 
     <div>
+      { { 'blog.comment_form_name' | t }}
       <label for="author">{{ 'blog.comment_form_name' | t }}</label>
       <input type="text" name="comment[author]" id="author" value="{{ form.author }}" required>
     </div>
 
     <div>
+      { { 'blog.comment_form_email' | t }}
       <label for="email">{{ 'blog.comment_form_email' | t }}</label>
       <input type="email" name="comment[email]" id="email" value="{{ form.email }}" required>
     </div>
 
     <div>
+      { { 'blog.comment_form_body' | t }}
       <label for="body">{{ 'blog.comment_form_body' | t }}</label>
       <textarea name="comment[body]" id="body" required>{{ form.body }}</textarea>
     </div>
 
+    < input type="submit" value="{ { 'blog.comment_form_submit' | t }}">
     <input type="submit" value="{{ 'blog.comment_form_submit' | t }}">
   {% endform %}
+  <div>
 {% endif %}
+
+<div>
+{ { end sections/article.liquid }}
+</div>
 
 {% schema %}
 {
