@@ -4,6 +4,10 @@
   ENABLED
   </div>
 {% endif %}
+{% if section.settings.main-image %}
+  {{ section.settings.main-image | image_tag }}
+{% endif %}
+
 
 {% schema %}
 {
@@ -14,6 +18,11 @@
       "id": "enabled",
       "label": "Show",
       "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "main-image",
+      "label": "Main image"
     }
   ],
   "presets": [
