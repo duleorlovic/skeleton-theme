@@ -18,7 +18,7 @@
       "name": "name-in-preset",
       "settings": {
         "enabled": true,
-        "main-image": "shopify://shop_images/29201_1200_1200px.jpg"
+        "main-image": "{{ metaobjects[\"shopify--color-pattern\"].animal.image.value }}"
       }
     }
   },
