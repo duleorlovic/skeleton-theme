@@ -9,12 +9,12 @@
  */
 {
   "sections": {
-    "main": {
+    "mai": {
       "type": "blog",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "mai"
   ]
 }
