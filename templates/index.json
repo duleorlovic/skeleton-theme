@@ -33,7 +33,7 @@
       "type": "hi",
       "name": "name-in-preset",
       "settings": {
-        "enabled": false
+        "enabled": true
       }
     }
   },
