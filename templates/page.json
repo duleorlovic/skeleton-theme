@@ -12,9 +12,30 @@
     "main": {
       "type": "page",
       "settings": {}
+    },
+    "custom_section_zkjj4f": {
+      "type": "custom-section",
+      "blocks": {
+        "text_bFpcUV": {
+          "type": "text",
+          "name": "t:general.text",
+          "settings": {
+            "text": "Moj text",
+            "text_style": "text--title",
+            "alignment": "left"
+          },
+          "blocks": {}
+        }
+      },
+      "block_order": [
+        "text_bFpcUV"
+      ],
+      "name": "t:general.custom_section",
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "custom_section_zkjj4f"
   ]
 }
