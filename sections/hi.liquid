@@ -7,6 +7,13 @@
 {% if section.settings.main-image %}
   {{ section.settings.main-image | image_url: width: 1000 | image_tag }}
 {% endif %}
+{% if section.blocks.size == 0 %}
+  no blocks
+{% else %}
+  {% for block in section.blocks %}
+    {{ block.settings.text }}<br>
+  {% endfor %}
+{% endif %}
 
 
 {% schema %}
@@ -24,6 +31,8 @@
       "id": "main-image",
       "label": "Main image"
     }
+  ],
+  "blocks": [
   ],
   "presets": [
     {
