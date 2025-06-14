@@ -1,9 +1,19 @@
 <h1>Hi</h1>
+{% if section.settings.enabled %}
+  ENABLED
+{% endif %}
 
 {% schema %}
 {
   "name": "Name in schema",
-  "settings": [],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "enabled",
+      "label": "Show",
+      "default": true
+    }
+  ],
   "presets": [
     {
       "name": "name-in-preset"
