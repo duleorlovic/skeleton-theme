@@ -1,0 +1,16 @@
+myblock start
+{{ block.settings.text }}
+{% schema %}
+{
+  "name": "my block",
+  "settings": [
+    {
+       "type": "text",
+       "id": "text",
+       "label": "ddd",
+       "default": "def"
+    }
+  ],
+  "presets": [{ "name": "my-block"}]
+}
+{% endschema %}
