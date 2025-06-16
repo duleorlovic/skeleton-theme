@@ -104,10 +104,21 @@
       ],
       "name": "t:general.custom_section",
       "settings": {}
+    },
+    "custom_section_r86Mnc": {
+      "type": "custom-section",
+      "custom_css": [
+        "div {background: red;}"
+      ],
+      "name": "t:general.custom_section",
+      "settings": {
+        "background_image": "shopify://shop_images/27024_1200_1200px.jpg"
+      }
     }
   },
   "order": [
     "main",
-    "custom_section_zkjj4f"
+    "custom_section_zkjj4f",
+    "custom_section_r86Mnc"
   ]
 }
