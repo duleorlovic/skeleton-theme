@@ -5,27 +5,38 @@
   https://shopify.dev/docs/storefronts/themes/architecture/templates/cart
 {% endcomment %}
 
+<div>
+{ { 'cart.title' | t }}
 <h1>{{ 'cart.title' | t }}</h1>
+</div>
 
 <form action="{{ routes.cart_url }}" method="post">
+< form action="{ { routes.cart_url }}" method="post">
   <table>
+    { % for item in cart.items %}
     {% for item in cart.items %}
       <tr>
         <td>
+          { % render 'image', image: item.image, url: item.url %}
           {% render 'image', image: item.image, url: item.url %}
         </td>
         <td>
+          { { item.product.title }}
           <p>{{ item.product.title }}</p>
+          { { 'cart.remove' | t | link_to: item.url_to_remove }}
           {{ 'cart.remove' | t | link_to: item.url_to_remove }}
         </td>
         <td>
+          < input type="text" name="updates[]" value="{ { item.quantity }}">
           <input type="text" name="updates[]" value="{{ item.quantity }}">
+          < input type="submit" value="{ { 'cart.update' | t }}">
           <input type="submit" value="{{ 'cart.update' | t }}">
         </td>
       </tr>
     {% endfor %}
   </table>
 
+  < input type="submit" name="checkout" value="{ { 'cart.checkout' | t }}">
   <input type="submit" name="checkout" value="{{ 'cart.checkout' | t }}">
 </form>
 
